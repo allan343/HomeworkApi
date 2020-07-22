@@ -5,7 +5,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const { NODE_ENV } = require('./config')
 const folderroute = require('./folders/folders-router')
-const noteroute = require('./notes/notes-router')
+const noteroute = require('./notes/HomeworkRouter')
 
 
 const app = express()

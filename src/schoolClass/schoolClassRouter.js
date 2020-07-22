@@ -1,6 +1,6 @@
 const express = require('express')
 //const xss = require('xss')
-const FoldersService = require('./SchoolClassService')
+const SchoolClassService = require('./SchoolClassService')
 
 const SchoolClassRouter = express.Router()
 const jsonParser = express.json()
@@ -28,9 +28,9 @@ SchoolClassRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    FoldersService.getAllFolders(knexInstance)
+    SchoolClassService.getAllSchoolClasses(knexInstance)
       .then(articles => {
-        res.json(articles.map(serializeFolder))
+        res.json(articles.map(serializeSchoolClass))
       })
       .catch(next)
   })
@@ -63,14 +63,14 @@ SchoolClassRouter
   SchoolClassRouter
   .route('/:schoolClass_id')
   .all((req, res, next) => {
-    FoldersService.getById(
+    SchoolClassService.getById(
       req.app.get('db'),
       req.params.schoolClass_id
     )
       .then(schoolClass => {
         if (!schoolClass) {
           return res.status(404).json({
-            error: { message: `Folder doesn't exist` }
+            error: { message: `School class doesn't exist` }
           })
         }
         res.schoolClass = schoolClass
