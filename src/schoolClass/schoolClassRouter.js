@@ -1,16 +1,30 @@
 const express = require('express')
 //const xss = require('xss')
-const FoldersService = require('./folders-service')
+const FoldersService = require('./SchoolClassService')
 
-const foldersRouter = express.Router()
+const SchoolClassRouter = express.Router()
 const jsonParser = express.json()
 
-const serializeFolder = folder => ({
-  id: folder.id,
-  name: folder.foldename,
-})
+const serializeSchoolClass = schoolClass => ({
+  id: schoolClass.classId,
+  className: schoolClass.className,
+  finishDate: schoolClass.finishDate,
+  startDate: schoolClass.startDate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher, 
+  startTime:schoolClass.startTime,
+  endTime:schoolClass.endTime,
+  Sun: schoolClass.dayOfWeek.Sun,
+  Mon: schoolClass.dayOfWeek.Mon,
+  Tue: schoolClass.dayOfWeek.Tue,
+  Wed: schoolClass.dayOfWeek.Wed,
+  Thurs: schoolClass.dayOfWeek.Thurs,
+  Fri: schoolClass.dayOfWeek.Fri,
+  Sat: schoolClass.dayOfWeek.Sat    
+});
 
-foldersRouter
+SchoolClassRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
@@ -21,9 +35,9 @@ foldersRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const {  name } = req.body
-    var foldename = name
-    const newFolder = {  foldename }
+    const newShoolClass = req.body;
+   
+    
 /*
     for (const [key, value] of Object.entries(newFolder))
       if (value == null)
@@ -31,46 +45,46 @@ foldersRouter
           error: { message: `Missing '${key}' in request body` }
         })
         //newFolder.author = author*/
-    FoldersService.insertFolder(
+    SchoolClassService.insertSchoolClass(
       req.app.get('db'),
-      newFolder
+      newSchoolClass
     )
-      .then(folder => {
-        console.log(folder)
+      .then(newShoolClass => {
+        console.log(newShoolClass)
         res
           .status(201)
          // .location(`/folders/${folder.id}`)
-          .location(req.originalUrl + `/${folder.id}`)
-          .json(serializeFolder(folder))
+          .location(req.originalUrl + `/${newShoolClass.id}`)
+          .json(serializeSchoolClass(newShoolClass))
       })
       .catch(next)
   })
 
-foldersRouter
-  .route('/:folder_id')
+  SchoolClassRouter
+  .route('/:schoolClass_id')
   .all((req, res, next) => {
     FoldersService.getById(
       req.app.get('db'),
-      req.params.folder_id
+      req.params.schoolClass_id
     )
-      .then(folder => {
-        if (!folder) {
+      .then(schoolClass => {
+        if (!schoolClass) {
           return res.status(404).json({
             error: { message: `Folder doesn't exist` }
           })
         }
-        res.folder = folder
+        res.schoolClass = schoolClass
         next()
       })
       .catch(next)
   })
   .get((req, res, next) => {
-    res.json(serializeFolder(res.folder))
+    res.json(serializeSchoolClass(res.schoolClass))
   })
   .delete((req, res, next) => {
-    FoldersService.deleteFolder(
+    SchoolClassService.deleteSchoolClass(
       req.app.get('db'),
-      req.params.folder_id
+      req.params.schoolClass_id
     )
       .then(numRowsAffected => {
         res.status(204).end()
@@ -79,11 +93,11 @@ foldersRouter
   })
 
    .patch(jsonParser, (req, res, next) => {
-       const { foldename } = req.body
-       const folderToUpdate = { foldename }
+       const { schoolClass } = req.body
+       const schoolClassToUpdate = { schoolClass }
     
 
-       const numberOfValues = Object.values(folderToUpdate).filter(Boolean).length
+       const numberOfValues = Object.values(schoolClassToUpdate).filter(Boolean).length
           if (numberOfValues === 0) {
             return res.status(400).json({
               error: {
@@ -92,10 +106,10 @@ foldersRouter
             })
           }
     
-       FoldersService.updateFolder(
+       schoolClassService.updateSchoolClass(
          req.app.get('db'),
-         req.params.folder_id,
-         folderToUpdate
+         req.params.schoolClass_id,
+         schoolClassToUpdate
        )
          .then(numRowsAffected => {
            res.status(204).end()
@@ -103,4 +117,4 @@ foldersRouter
          .catch(next)
       })
 
-module.exports = foldersRouter
+module.exports = SchoolClassRouter
