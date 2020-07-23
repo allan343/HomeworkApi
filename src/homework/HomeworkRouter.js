@@ -94,4 +94,4 @@ HomeworkRouter
       .catch(next);
   })
 
-module.exports = homeworkRouter
+module.exports = HomeworkRouter
