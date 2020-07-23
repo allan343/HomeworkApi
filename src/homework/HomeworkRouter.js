@@ -47,7 +47,7 @@ HomeworkRouter
 HomeworkRouter
   .route('/:homework_id')
   .all((req, res, next) => {
-    NotesService.getById(
+    HomeworkService.getById(
       req.app.get('db'),
       req.params.homework_id
     )
@@ -82,7 +82,7 @@ HomeworkRouter
     const newHomework = req.body;
     newHomework.id = req.params.homework_id;
 
-    ShowsService.updateHomework(
+    HomeworkService.updateHomework(
       req.app.get('db'),
       newHomework.id,
       newHomework
