@@ -29,13 +29,13 @@ SchoolClassRouter
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     SchoolClassService.getAllSchoolClasses(knexInstance)
-      .then(articles => {
-        res.json(articles.map(serializeSchoolClass))
+      .then(schoolClasses => {
+        res.json(schoolClasses.map(serializeSchoolClass))
       })
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const newShoolClass = req.body;
+    const newSchoolClass = req.body;
    
     
 /*

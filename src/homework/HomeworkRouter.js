@@ -29,9 +29,7 @@ HomeworkRouter
   .post(jsonParser, (req, res, next) => {
     const newHomework = req.body;
 
- 
-       
-    HomeworkService.insertNote(
+    HomeworkService.insertHomework(
       req.app.get('db'),
       newHomework
     )
@@ -39,7 +37,7 @@ HomeworkRouter
         res
           .status(201)
           .location(req.originalUrl + `/${newHomework.id}`)
-          .json(serializeNote(newHomework))
+          .json(serializeHomework(newHomework))
       })
       .catch(next)
   })
@@ -63,7 +61,7 @@ HomeworkRouter
       .catch(next)
   })
   .get((req, res, next) => {
-    res.json(serializeNote(res.homework))
+    res.json(serializeHomework(res.homework))
   })
   .delete((req, res, next) => {
     HomeworkService.deleteHomework(
