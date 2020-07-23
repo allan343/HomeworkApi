@@ -1,4 +1,4 @@
-const Service = {
+const SchoolClassService = {
   getAllSchoolClasses(knex) {
     return knex.select('*').from('school_classes')
   },
