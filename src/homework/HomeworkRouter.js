@@ -8,9 +8,9 @@ const jsonParser = express.json()
 const serializeHomework = homework => ({
   id: homework.HomeworkId,
   classId: homework.classId,
-  description: homework.description,
+  classDescription: homework.description,
   schoolClass: homework.schoolClass,
-  type: homework.type,
+  classType: homework.type,
   dueDate: homework.dueDate,
   dueTime: homework.dueTime,
   priority: homework.priority
