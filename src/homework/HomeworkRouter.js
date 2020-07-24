@@ -13,7 +13,7 @@ const serializeHomework = homework => ({
   homeworktype: homework.homeworktype,
   duedate: homework.duedate,
   duetime: homework.duetime,
-  priority: homework.homeworkpriority
+  homeworkpriority: homework.homeworkpriority
 })
 
 HomeworkRouter
