@@ -6,11 +6,11 @@ const HomeworkRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeHomework = homework => ({
-  id: homework.homeworkid,
+  homeworkid: homework.homeworkid,
   classid: homework.classid,
-  classdescription: homework.description,
-  schooldlass: homework.schoolclass,
-  classtype: homework.type,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
   duedate: homework.duedate,
   duetime: homework.duetime,
   priority: homework.priority
@@ -28,7 +28,7 @@ HomeworkRouter
   })
   .post(jsonParser, (req, res, next) => {
     const newHomework = req.body;
-
+      console.log(newHomework);
     HomeworkService.insertHomework(
       req.app.get('db'),
       newHomework
