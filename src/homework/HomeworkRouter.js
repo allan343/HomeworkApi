@@ -6,13 +6,13 @@ const HomeworkRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeHomework = homework => ({
-  id: homework.HomeworkId,
-  classId: homework.classId,
-  classDescription: homework.description,
-  schoolClass: homework.schoolClass,
-  classType: homework.type,
-  dueDate: homework.dueDate,
-  dueTime: homework.dueTime,
+  id: homework.homeworkid,
+  classid: homework.classid,
+  classdescription: homework.description,
+  schooldlass: homework.schoolclass,
+  classtype: homework.type,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
   priority: homework.priority
 })
 

@@ -6,23 +6,23 @@ const SchoolClassRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeSchoolClass = schoolClass => ({
-  classId: schoolClass.classId,
-  className: schoolClass.className,
-  finishDate: schoolClass.finishDate,
-  startDate: schoolClass.startDate,
+  id: schoolClass.classid,
+  classname: schoolClass.classdame,
+  finishDate: schoolClass.finishdate,
+  startDate: schoolClass.startdate,
   building: schoolClass.building,
   room: schoolClass.room,
   teacher: schoolClass.teacher, 
-  startTime:schoolClass.startTime,
-  endTime:schoolClass.endTime,
+  starttime:schoolClass.starttime,
+  endtime:schoolClass.endtime,
   dayOfWeek:{
-    Sun: schoolClass.sun,
-            Mon: schoolClass.mon,
-            Tue: schoolClass.tue,
-            Wed: schoolClass.wed,
-            Thurs: schoolClass.thurs,
-            Fri: schoolClass.fri,
-            Sat: schoolClass.sat
+    sun: schoolClass.sun,
+            mon: schoolClass.mon,
+            tue: schoolClass.tue,
+            wed: schoolClass.wed,
+            thurs: schoolClass.thurs,
+            fri: schoolClass.fri,
+            sat: schoolClass.sat
     }
 
 });
@@ -39,7 +39,16 @@ SchoolClassRouter
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
-    console.log(newSchoolClass);
+    console.log("mynewclass "+ newSchoolClass.classame);
+    console.log("mynewclass "+ newSchoolClass.finishate);
+    console.log("mynewclass "+ newSchoolClass.startate);
+    console.log("mynewclass "+ newSchoolClass.building);
+    console.log("mynewclass "+ newSchoolClass.room);
+    console.log("mynewclass "+ newSchoolClass.teacher);
+    console.log("mynewclass "+ newSchoolClass.startime);
+    console.log("mynewclass "+ newSchoolClass.endtime);
+    console.log("mynewclass "+ newSchoolClass.dayOfWeek);
+
    
     
 /*
