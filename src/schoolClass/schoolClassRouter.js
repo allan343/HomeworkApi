@@ -6,7 +6,7 @@ const SchoolClassRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeSchoolClass = schoolClass => ({
-  id: schoolClass.classId,
+  classId: schoolClass.classId,
   className: schoolClass.className,
   finishDate: schoolClass.finishDate,
   startDate: schoolClass.startDate,
@@ -15,13 +15,16 @@ const serializeSchoolClass = schoolClass => ({
   teacher: schoolClass.teacher, 
   startTime:schoolClass.startTime,
   endTime:schoolClass.endTime,
-  Sun: schoolClass.dayOfWeek.Sun,
-  Mon: schoolClass.dayOfWeek.Mon,
-  Tue: schoolClass.dayOfWeek.Tue,
-  Wed: schoolClass.dayOfWeek.Wed,
-  Thurs: schoolClass.dayOfWeek.Thurs,
-  Fri: schoolClass.dayOfWeek.Fri,
-  Sat: schoolClass.dayOfWeek.Sat    
+  dayOfWeek:{
+    Sun: schoolClass.sun,
+            Mon: schoolClass.mon,
+            Tue: schoolClass.tue,
+            Wed: schoolClass.wed,
+            Thurs: schoolClass.thurs,
+            Fri: schoolClass.fri,
+            Sat: schoolClass.sat
+    }
+
 });
 
 SchoolClassRouter
@@ -36,6 +39,7 @@ SchoolClassRouter
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
+    console.log(newSchoolClass);
    
     
 /*
@@ -93,10 +97,11 @@ SchoolClassRouter
   })
 
    .patch(jsonParser, (req, res, next) => {
-       const { schoolClass } = req.body
-       const schoolClassToUpdate = { schoolClass }
+       const { schoolClassToUpdate,schoolClass } = req.body;
+       console.log(schoolClassToUpdate);
+      // const schoolClassToUpdate = { schoolClass };
     
-
+    /*
        const numberOfValues = Object.values(schoolClassToUpdate).filter(Boolean).length
           if (numberOfValues === 0) {
             return res.status(400).json({
@@ -105,8 +110,8 @@ SchoolClassRouter
               }
             })
           }
-    
-       schoolClassService.updateSchoolClass(
+    */
+       SchoolClassService.updateSchoolClass(
          req.app.get('db'),
          req.params.schoolClass_id,
          schoolClassToUpdate
