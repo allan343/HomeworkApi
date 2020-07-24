@@ -6,8 +6,8 @@ const SchoolClassRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeSchoolClass = schoolClass => ({
-  id: schoolClass.classid,
-  classname: schoolClass.classdame,
+  id: schoolClass.id,
+  classname: schoolClass.classname,
   finishDate: schoolClass.finishdate,
   startDate: schoolClass.startdate,
   building: schoolClass.building,
@@ -39,15 +39,15 @@ SchoolClassRouter
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
-    console.log("mynewclass "+ newSchoolClass.classame);
-    console.log("mynewclass "+ newSchoolClass.finishate);
-    console.log("mynewclass "+ newSchoolClass.startate);
+    console.log("mynewclass "+ newSchoolClass.classname);
+    console.log("mynewclass "+ newSchoolClass.finisdate);
+    console.log("mynewclass "+ newSchoolClass.startdate);
     console.log("mynewclass "+ newSchoolClass.building);
     console.log("mynewclass "+ newSchoolClass.room);
     console.log("mynewclass "+ newSchoolClass.teacher);
     console.log("mynewclass "+ newSchoolClass.startime);
     console.log("mynewclass "+ newSchoolClass.endtime);
-    console.log("mynewclass "+ newSchoolClass.dayOfWeek);
+    //console.log("mynewclass "+ newSchoolClass.dayOfWeek);
 
    
     
@@ -106,7 +106,8 @@ SchoolClassRouter
   })
 
    .patch(jsonParser, (req, res, next) => {
-       const { schoolClassToUpdate,schoolClass } = req.body;
+       const schoolClassToUpdate  = req.body;
+       schoolClassToUpdate.id = req.params.schoolClass_id;
        console.log(schoolClassToUpdate);
       // const schoolClassToUpdate = { schoolClass };
     
