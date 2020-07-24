@@ -12,18 +12,18 @@ const serializeSchoolClass = schoolClass => ({
   startDate: schoolClass.startdate,
   building: schoolClass.building,
   room: schoolClass.room,
-  teacher: schoolClass.teacher, 
-  starttime:schoolClass.starttime,
-  endtime:schoolClass.endtime,
-  dayOfWeek:{
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  dayOfWeek: {
     sun: schoolClass.sun,
-            mon: schoolClass.mon,
-            tue: schoolClass.tue,
-            wed: schoolClass.wed,
-            thurs: schoolClass.thurs,
-            fri: schoolClass.fri,
-            sat: schoolClass.sat
-    }
+    mon: schoolClass.mon,
+    tue: schoolClass.tue,
+    wed: schoolClass.wed,
+    thurs: schoolClass.thurs,
+    fri: schoolClass.fri,
+    sat: schoolClass.sat
+  }
 
 });
 
@@ -39,25 +39,7 @@ SchoolClassRouter
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
-    console.log("mynewclass "+ newSchoolClass.classname);
-    console.log("mynewclass "+ newSchoolClass.finisdate);
-    console.log("mynewclass "+ newSchoolClass.startdate);
-    console.log("mynewclass "+ newSchoolClass.building);
-    console.log("mynewclass "+ newSchoolClass.room);
-    console.log("mynewclass "+ newSchoolClass.teacher);
-    console.log("mynewclass "+ newSchoolClass.startime);
-    console.log("mynewclass "+ newSchoolClass.endtime);
-    //console.log("mynewclass "+ newSchoolClass.dayOfWeek);
 
-   
-    
-/*
-    for (const [key, value] of Object.entries(newFolder))
-      if (value == null)
-        return res.status(400).json({
-          error: { message: `Missing '${key}' in request body` }
-        })
-        //newFolder.author = author*/
     SchoolClassService.insertSchoolClass(
       req.app.get('db'),
       newSchoolClass
@@ -66,14 +48,13 @@ SchoolClassRouter
         console.log(newShoolClass)
         res
           .status(201)
-         // .location(`/folders/${folder.id}`)
           .location(req.originalUrl + `/${newShoolClass.id}`)
           .json(serializeSchoolClass(newShoolClass))
       })
       .catch(next)
   })
 
-  SchoolClassRouter
+SchoolClassRouter
   .route('/:schoolClass_id')
   .all((req, res, next) => {
     SchoolClassService.getById(
@@ -105,31 +86,20 @@ SchoolClassRouter
       .catch(next)
   })
 
-   .patch(jsonParser, (req, res, next) => {
-       const schoolClassToUpdate  = req.body;
-       schoolClassToUpdate.id = req.params.schoolClass_id;
-       console.log(schoolClassToUpdate);
-      // const schoolClassToUpdate = { schoolClass };
-    
-    /*
-       const numberOfValues = Object.values(schoolClassToUpdate).filter(Boolean).length
-          if (numberOfValues === 0) {
-            return res.status(400).json({
-              error: {
-                message: `Request body must contain either 'title', 'style' or 'content'`
-              }
-            })
-          }
-    */
-       SchoolClassService.updateSchoolClass(
-         req.app.get('db'),
-         req.params.schoolClass_id,
-         schoolClassToUpdate
-       )
-         .then(numRowsAffected => {
-           res.status(204).end()
-         })
-         .catch(next)
+  .patch(jsonParser, (req, res, next) => {
+    const schoolClassToUpdate = req.body;
+    schoolClassToUpdate.id = req.params.schoolClass_id;
+    console.log(schoolClassToUpdate);
+
+    SchoolClassService.updateSchoolClass(
+      req.app.get('db'),
+      req.params.schoolClass_id,
+      schoolClassToUpdate
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
       })
+      .catch(next)
+  })
 
 module.exports = SchoolClassRouter

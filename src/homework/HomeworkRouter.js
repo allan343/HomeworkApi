@@ -78,16 +78,16 @@ HomeworkRouter
       
        
     const newHomework = req.body;
-    newHomework.id = req.params.homework_id;
+    newHomework.homeworkid = req.params.homework_id;
 
     HomeworkService.updateHomework(
       req.app.get('db'),
-      newHomework.id,
+      newHomework.homeworkid,
       newHomework
     )
       .then(numRowsAffected => {
 
-        HomeworkService.getById(req.app.get('db'), newShow.id)
+        HomeworkService.getById(req.app.get('db'), newHomework.homeworkid)
           .then(homework => { res.status(200).json(serializeHomework(homework)) });
 
       })

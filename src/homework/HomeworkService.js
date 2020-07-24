@@ -11,17 +11,17 @@ const HomeworkService = {
         return rows[0]
       })
   },
-  getById(knex, id) {
-    return knex.from('homework_list').select('*').where('id', id).first()
+  getById(knex, homeworkid) {
+    return knex.from('homework_list').select('*').where('homeworkid', homeworkid).first()
   },
-  deleteHomework(knex, id) {
+  deleteHomework(knex, homeworkid) {
     return knex('homework_list')
-      .where({ id })
+      .where({ homeworkid })
       .delete()
   },
-  updateHomework(knex, id, newHomework) {
+  updateHomework(knex, homeworkid, newHomework) {
     return knex('homework_list')
-      .where({ id })
+      .where({ homeworkid })
       .update(newHomework)
   },
 }
