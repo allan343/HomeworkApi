@@ -27,6 +27,7 @@ HomeworkRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
+    console.log("post");
     const newHomework = req.body;
       console.log(newHomework);
     HomeworkService.insertHomework(

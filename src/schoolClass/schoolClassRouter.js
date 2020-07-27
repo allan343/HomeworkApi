@@ -8,23 +8,21 @@ const jsonParser = express.json()
 const serializeSchoolClass = schoolClass => ({
   id: schoolClass.id,
   classname: schoolClass.classname,
-  finishDate: schoolClass.finishdate,
-  startDate: schoolClass.startdate,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
   building: schoolClass.building,
   room: schoolClass.room,
   teacher: schoolClass.teacher,
   starttime: schoolClass.starttime,
   endtime: schoolClass.endtime,
-  dayOfWeek: {
-    sun: schoolClass.sun,
-    mon: schoolClass.mon,
-    tue: schoolClass.tue,
-    wed: schoolClass.wed,
-    thurs: schoolClass.thurs,
-    fri: schoolClass.fri,
-    sat: schoolClass.sat
-  }
-
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+  
 });
 
 SchoolClassRouter
@@ -38,6 +36,7 @@ SchoolClassRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
+    console.log("post");
     const newSchoolClass = req.body;
 
     SchoolClassService.insertSchoolClass(
@@ -80,9 +79,12 @@ SchoolClassRouter
       req.app.get('db'),
       req.params.schoolClass_id
     )
-      .then(numRowsAffected => {
-        res.status(204).end()
-      })
+    .then(newShoolClass => {
+      console.log(newShoolClass)
+      res
+        .status(201)
+        .send(serializeSchoolClass(newShoolClass))
+    })
       .catch(next)
   })
 
