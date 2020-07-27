@@ -99,9 +99,11 @@ SchoolClassRouter
       schoolClassToUpdate
     )
       .then(numRowsAffected => {
-        res.status(204).end()
-      })
-      .catch(next)
+        SchoolClassService.getById(req.app.get('db'), schoolClassToUpdate.id)
+        .then(schoolClass => { res.status(200).json(serializeSchoolClass(schoolClass)) });
+
+    })
+    .catch(next);
   })
 
 module.exports = SchoolClassRouter
