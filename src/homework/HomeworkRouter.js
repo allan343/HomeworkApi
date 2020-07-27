@@ -69,9 +69,12 @@ HomeworkRouter
       req.app.get('db'),
       req.params.homework_id
     )
-      .then(numRowsAffected => {
-        res.status(204).end()
-      })
+    .then(newHomework => {
+      console.log(newHomework)
+      res
+        .status(201)
+        .send(serializeHomework(newHomework))
+    })
       .catch(next)
   })
 
