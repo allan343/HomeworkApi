@@ -1,5 +1,4 @@
 const SchoolClassService = require('../src/schoolClass/SchoolClassService');
-const HomeworkService = require('../src/homework/HomeworkService');
 const knex = require('knex');
 
 describe(`School List Service object`, function () {
@@ -59,31 +58,6 @@ describe(`School List Service object`, function () {
             fri: false,
             sat: false
         },
-
-    ]
-
-    let testHomework = [
-        {
-            homeworkid: 1,
-            classid: 1,
-            homeworkdescription: "math homework",
-            schoolclass: "math",
-            homeworktype: "Homework",
-            duedate: new Date("2011/07/03"),
-            duetime: "2:00pm",
-            homeworkpriority: "Medium"
-        },
-        {
-            homeworkid: 2,
-            classid: 2,
-            homeworkdescription: "physics homework",
-            schoolclass: "physics",
-            homeworktype: "Homework",
-            duedate: new Date("2011/07/03"),
-            duetime: "10:00am",
-            homeworkpriority: "Medium"
-        },
-
     ]
 
     before(() => {
@@ -95,21 +69,13 @@ describe(`School List Service object`, function () {
 
     before(() => {
         console.log("huh?");
-        // knex('school_classes').truncate();
         return db('school_classes').del()
-      
-        //  db('homework_list').truncate();
-        //db('school_classes').truncate();
-        // knex.raw('TRUNCATE TABLE school_classes CASCADE')
     }
     );
 
     afterEach(() => {
         console.log("why aren't you truncating?");
-        //knex('school_classes').truncate();
-        //   knex.raw('TRUNCATE TABLE school_classes CASCADE')
-        //  db('homework_list').truncate();
-       return  db('school_classes').del()
+        return db('school_classes').del()
     }
     );
 
@@ -169,16 +135,7 @@ describe(`School List Service object`, function () {
                     });
                 })
         })
-
-        ////
-        ///
-        //
-        //
-      
     })
-
-
-
 
     context(`Given 'schoolclasss' has no data`, () => {
         it(`getAllItems() resolves an empty array`, () => {
