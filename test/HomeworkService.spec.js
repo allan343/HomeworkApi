@@ -1,4 +1,4 @@
-const HomeworkService = require('../src/homeowrk/HomeworkService');
+const HomeworkService = require('../src/homework/HomeworkService');
 const knex = require('knex');
 
 describe(`Homework Service object`, function () {
