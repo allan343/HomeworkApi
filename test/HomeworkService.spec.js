@@ -1,7 +1,7 @@
 const HomeworkService = require('../src/homeowrk/HomeworkService');
 const knex = require('knex');
 
-describe(`Show List Service object`, function () {
+describe(`Homework Service object`, function () {
   let db;
   let testItems = [
     {
@@ -34,9 +34,9 @@ describe(`Show List Service object`, function () {
     });
   })
 
-  before(() => db('shows').truncate());
+  before(() => db('homework_list').truncate());
 
-  afterEach(() => db('shows').truncate());
+  afterEach(() => db('homework_list').truncate());
 
   after(() => db.destroy());
 
@@ -55,7 +55,7 @@ describe(`Show List Service object`, function () {
         })
     })
 
-    it(`getById() resolves an article by id from 'shopping_list' table`, () => {
+    it(`getById() resolves a homework by id from 'homework' table`, () => {
       const idToGet = 2;
       const secondItem = testItems[idToGet - 1];
       return HomeworkService.getById(db, idToGet)
@@ -81,10 +81,10 @@ describe(`Show List Service object`, function () {
     it(`updateItem() updates an homework from the 'homework' table`, () => {
       const idOfItemToUpdate = 1;
       const newItemData = {
-        homeworkdescription: 'phyics lab',
+        homeworkdescription: 'physics lab',
       };
       const originalItem = testItems[idOfItemToUpdate - 1];
-      return HomeworkService.updateShow(db, idOfItemToUpdate, newItemData)
+      return HomeworkService.updateHomework(db, idOfItemToUpdate, newItemData)
         .then(() => HomeworkService.getById(db, idOfItemToUpdate))
         .then(homework => {
           expect(homework).to.eql({
