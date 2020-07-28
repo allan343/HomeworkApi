@@ -1,16 +1,75 @@
 const HomeworkService = require('../src/homework/HomeworkService');
 const knex = require('knex');
-/*
+
 describe(`Homework Service object`, function () {
   let db;
+
   let testItems = [
+    {
+        id: 1,
+        classname: "Math",
+        finishdate: new Date("2011/11/23"),
+        startdate: new Date("2011/07/03"),
+        building: "mcld",
+        room: "201",
+        teacher: "Vidas",
+        starttime: "1:00pm",
+        endtime: "2:00pm",
+        sun: false,
+        mon: false,
+        tue: false,
+        wed: false,
+        thurs: false,
+        fri: false,
+        sat: false
+    },
+    {
+        id: 2,
+        classname: "Physics",
+        finishdate: new Date("2011/11/23"),
+        startdate: new Date("2011/07/03"),
+        building: "kerner",
+        room: "202",
+        teacher: "Willan",
+        starttime: "9:00am",
+        endtime: "10:00am",
+        sun: false,
+        mon: false,
+        tue: false,
+        wed: false,
+        thurs: false,
+        fri: false,
+        sat: false
+    },
+    {
+        id: 3,
+        classname: "Chemistry",
+        finishdate: new Date("2011/11/23"),
+        startdate: new Date("2011/07/03"),
+        building: "chem building",
+        room: "202",
+        teacher: "taylor",
+        starttime: "9:00am",
+        endtime: "10:00am",
+        sun: false,
+        mon: false,
+        tue: false,
+        wed: false,
+        thurs: false,
+        fri: false,
+        sat: false
+    },
+
+]
+
+  let testHomework = [
     {
       homeworkid: 1,
       classid: 1,
       homeworkdescription: "math homework",
       schoolclass: "math",
       homeworktype: "Homework",
-      duedate: "07-27-2020",
+      duedate: new Date("2011/07/03"),
       duetime: "2:00pm",
       homeworkpriority: "Medium"
     },
@@ -20,7 +79,7 @@ describe(`Homework Service object`, function () {
       homeworkdescription: "physics homework",
       schoolclass: "physics",
       homeworktype: "Homework",
-      duedate: "07-27-2020",
+      duedate: new Date("2011/07/03"),
       duetime: "10:00am",
       homeworkpriority: "Medium"
     },
@@ -34,32 +93,44 @@ describe(`Homework Service object`, function () {
     });
   })
 
-  before(() => db('homework_list').truncate());
+  before(() =>
+  
 
-  afterEach(() => db('homework_list').truncate());
+  db('school_classes').del().then(() => {
+                db('homework_list').del();
+            
+            })
+  
+  
+  );
 
+ afterEach(() =>  db('school_classes').del().then(() => {
+    db('homework_list').del();
+
+}));
   after(() => db.destroy());
 
   context(`Given 'homework' has data`, () => {
     beforeEach(() => {
+console.log("test");
 
-
-        db.select("*").from("school_classes").then(console.log)
-        /*return db.into('school_classes')
-            .insert(testItems).then(() => {
-                console.log(SchoolClassService.getById(db, 1));
-               
-                db.into('homework_list')
+  
+        return db('school_classes')
+            .insert(testItems)
+            .then(() => {
+             
+            return db('homework_list')
                 .insert(testHomework);
-               // db.sele
+              
             })
-
+    
     })
 
     it(`getAllItems() resolves all items from 'homework' table`, () => {
-
+    //  db.select("*").from("homework_list").then(console.log)
         return HomeworkService.getAllHomework(db)
             .then(actual => {
+              console.log(actual);
                 expect(actual).to.eql(testHomework);
             })
     })
@@ -81,8 +152,7 @@ describe(`Homework Service object`, function () {
             .then(() => HomeworkService.getAllHomework(db))
             .then(allItems => {
                 // copy the test items array without the removed item
-                const expected = testItems
-                    .filter(homework => homework.homeworkid !== homeworkId);
+                const expected = testHomework.filter(homework => homework.homeworkid !== homeworkId);
                 expect(allItems).to.eql(expected);
             })
     })
@@ -106,6 +176,15 @@ describe(`Homework Service object`, function () {
 })
 
 context(`Given 'homework' has no data`, () => {
+  beforeEach(() => {
+
+
+   
+        return db.into('school_classes')
+            .insert(testItems)
+  });
+
+
     it(`getAllItems() resolves an empty array`, () => {
         return HomeworkService.getAllHomework(db)
             .then(actual => {
@@ -133,4 +212,4 @@ context(`Given 'homework' has no data`, () => {
             })
     })
 })
-})*/
+})
