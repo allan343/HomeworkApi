@@ -1,4 +1,5 @@
 const SchoolClassService = require('../src/schoolClass/SchoolClassService');
+const HomeworkService = require('../src/homework/HomeworkService');
 const knex = require('knex');
 
 describe(`School List Service object`, function () {
@@ -7,38 +8,80 @@ describe(`School List Service object`, function () {
         {
             id: 1,
             classname: "Math",
-            finishdate: "11-27-2020",
-            startdate: "07-06-2020",
+            finishdate: new Date("2011/11/23"),
+            startdate: new Date("2011/07/03"),
             building: "mcld",
             room: "201",
             teacher: "Vidas",
             starttime: "1:00pm",
             endtime: "2:00pm",
-            sun: "false",
-            mon: "false",
-            tue: "false",
-            wed: "false",
-            thurs: "false",
-            fri: "false",
-            sat: "false"
+            sun: false,
+            mon: false,
+            tue: false,
+            wed: false,
+            thurs: false,
+            fri: false,
+            sat: false
         },
         {
             id: 2,
             classname: "Physics",
-            finishdate: "11-26-2020",
-            startdate: "07-07-2020",
+            finishdate: new Date("2011/11/23"),
+            startdate: new Date("2011/07/03"),
             building: "kerner",
             room: "202",
             teacher: "Willan",
             starttime: "9:00am",
             endtime: "10:00am",
-            sun: "false",
-            mon: "false",
-            tue: "false",
-            wed: "false",
-            thurs: "false",
-            fri: "false",
-            sat: "false"
+            sun: false,
+            mon: false,
+            tue: false,
+            wed: false,
+            thurs: false,
+            fri: false,
+            sat: false
+        },
+        {
+            id: 3,
+            classname: "Chemistry",
+            finishdate: new Date("2011/11/23"),
+            startdate: new Date("2011/07/03"),
+            building: "chem building",
+            room: "202",
+            teacher: "taylor",
+            starttime: "9:00am",
+            endtime: "10:00am",
+            sun: false,
+            mon: false,
+            tue: false,
+            wed: false,
+            thurs: false,
+            fri: false,
+            sat: false
+        },
+
+    ]
+
+    let testHomework = [
+        {
+            homeworkid: 1,
+            classid: 1,
+            homeworkdescription: "math homework",
+            schoolclass: "math",
+            homeworktype: "Homework",
+            duedate: new Date("2011/07/03"),
+            duetime: "2:00pm",
+            homeworkpriority: "Medium"
+        },
+        {
+            homeworkid: 2,
+            classid: 2,
+            homeworkdescription: "physics homework",
+            schoolclass: "physics",
+            homeworktype: "Homework",
+            duedate: new Date("2011/07/03"),
+            duetime: "10:00am",
+            homeworkpriority: "Medium"
         },
 
     ]
@@ -50,9 +93,25 @@ describe(`School List Service object`, function () {
         });
     })
 
-    before(() => db('school_classes').truncate());
+    before(() => {
+        console.log("huh?");
+        // knex('school_classes').truncate();
+        return db('school_classes').del()
+      
+        //  db('homework_list').truncate();
+        //db('school_classes').truncate();
+        // knex.raw('TRUNCATE TABLE school_classes CASCADE')
+    }
+    );
 
-    afterEach(() => db('school_classes').truncate());
+    afterEach(() => {
+        console.log("why aren't you truncating?");
+        //knex('school_classes').truncate();
+        //   knex.raw('TRUNCATE TABLE school_classes CASCADE')
+        //  db('homework_list').truncate();
+       return  db('school_classes').del()
+    }
+    );
 
     after(() => db.destroy());
 
@@ -83,7 +142,7 @@ describe(`School List Service object`, function () {
         })
 
         it(`deleteItem() removes a schoolClass ;by id from 'school' table`, () => {
-            const classId = 1;
+            const classId = 3;
             return SchoolClassService.deleteSchoolClass(db, classId)
                 .then(() => SchoolClassService.getAllSchoolClasses(db))
                 .then(allItems => {
@@ -95,7 +154,7 @@ describe(`School List Service object`, function () {
         })
 
         it(`updateItem() updates an show from the 'show' table`, () => {
-            const idOfItemToUpdate = 1;
+            const idOfItemToUpdate = 2;
             const newItemData = {
                 classname: 'Biology',
             };
@@ -110,7 +169,16 @@ describe(`School List Service object`, function () {
                     });
                 })
         })
+
+        ////
+        ///
+        //
+        //
+      
     })
+
+
+
 
     context(`Given 'schoolclasss' has no data`, () => {
         it(`getAllItems() resolves an empty array`, () => {
@@ -124,20 +192,20 @@ describe(`School List Service object`, function () {
             const newItem = {
                 id: 3,
                 classname: "Chemistry",
-                finishdate: "11-26-2020",
-                startdate: "7-07-2020",
+                finishdate: new Date("2011/11/23"),
+                startdate: new Date("2011/07/03"),
                 building: "kerner",
                 room: "202",
                 teacher: "Willan",
                 starttime: "9:00am",
                 endtime: "10:00am",
-                sun: "false",
-                mon: "false",
-                tue: "false",
-                wed: "false",
-                thurs: "false",
-                fri: "false",
-                sat: "false"
+                sun: false,
+                mon: false,
+                tue: false,
+                wed: false,
+                thurs: false,
+                fri: false,
+                sat: false
             };
             return SchoolClassService.insertSchoolClass(db, newItem)
                 .then(actual => {
@@ -148,4 +216,6 @@ describe(`School List Service object`, function () {
                 })
         })
     })
+
+
 })
