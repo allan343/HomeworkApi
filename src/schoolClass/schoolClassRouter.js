@@ -36,7 +36,6 @@ SchoolClassRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    console.log("post");
     const newSchoolClass = req.body;
 
     SchoolClassService.insertSchoolClass(
@@ -44,7 +43,6 @@ SchoolClassRouter
       newSchoolClass
     )
       .then(newShoolClass => {
-        console.log(newShoolClass)
         res
           .status(201)
           .location(req.originalUrl + `/${newShoolClass.id}`)

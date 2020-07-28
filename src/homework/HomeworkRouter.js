@@ -27,9 +27,7 @@ HomeworkRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    console.log("post");
     const newHomework = req.body;
-      console.log(newHomework);
     HomeworkService.insertHomework(
       req.app.get('db'),
       newHomework
@@ -69,18 +67,17 @@ HomeworkRouter
       req.app.get('db'),
       req.params.homework_id
     )
-    .then(newHomework => {
-      console.log(newHomework)
-      res
-        .status(201)
-        .send(serializeHomework(newHomework))
-    })
+      .then(newHomework => {
+        console.log(newHomework)
+        res
+          .status(201)
+          .send(serializeHomework(newHomework))
+      })
       .catch(next)
   })
 
-   .patch(jsonParser, (req, res, next) => {
-      
-       
+  .patch(jsonParser, (req, res, next) => {
+
     const newHomework = req.body;
     newHomework.homeworkid = req.params.homework_id;
 
