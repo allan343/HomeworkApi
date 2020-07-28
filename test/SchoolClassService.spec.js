@@ -68,13 +68,11 @@ describe(`School List Service object`, function () {
     })
 
     before(() => {
-        console.log("huh?");
         return db('school_classes').del()
     }
     );
 
     afterEach(() => {
-        console.log("why aren't you truncating?");
         return db('school_classes').del()
     }
     );
