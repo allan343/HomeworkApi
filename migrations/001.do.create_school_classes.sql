@@ -1,3 +1,4 @@
+drop table if exists homework_list;
 drop table if exists school_classes;
 
 -- Create the table anew
