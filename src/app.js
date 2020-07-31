@@ -20,7 +20,7 @@ app.use(cors())
 app.use('/schoolClass',SchoolClassRoute)
 app.use('/homework',HomeworkRoute)
 app.get('/', (req, res) => {
-       res.send('Hello World!')
+       res.send('Hello, world!')
      })
     
 
