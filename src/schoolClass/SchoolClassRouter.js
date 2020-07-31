@@ -1,5 +1,4 @@
 const express = require('express')
-//const xss = require('xss')
 const SchoolClassService = require('./SchoolClassService')
 
 const SchoolClassRouter = express.Router()

@@ -1,5 +1,4 @@
 const express = require('express')
-//const xss = require('xss')
 const HomeworkService = require('./HomeworkService')
 
 const HomeworkRouter = express.Router()
