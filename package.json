@@ -26,11 +26,11 @@
     "helmet": "^3.23.3",
     "knex": "^0.19.4",
     "morgan": "^1.9.1",
+    "nodemon": "^2.0.4",
     "pg": "^7.12.1",
     "postgrator": "^3.2.0",
     "postgrator-cli": "^3.3.0",
-    "sqlite3": "^5.0.0",
-    "nodemon": "^2.0.4"
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
