@@ -8,6 +8,6 @@ CREATE TABLE homework_list (
             homeworktype text,
             duedate Date,
             duetime text,
-            priority text
+            homeworkpriority text
     
 );
