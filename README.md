@@ -275,6 +275,146 @@ schoolClass => ({
   }
 
 ```
+
+##  Schema
+
+homework
+
+```
+homework => ({
+  homeworkid: homework.homeworkid,
+  classid: homework.classid,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
+  homeworkpriority: homework.homeworkpriority
+})
+```
+
+##  API OVERVIEW
+
+##  GET /api/homework/
+```
+// req.query
+{
+  none expected
+}
+
+// res.body
+
+  {
+    {
+  homeworkid: homework.homeworkid,
+  classid: homework.classid,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
+  homeworkpriority: homework.homeworkpriority
+}
+  }
+
+```
+
+##  POST /api/homework/
+```
+// req.query
+ {
+  homeworkid: homework.homeworkid,
+  classid: homework.classid,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
+  homeworkpriority: homework.homeworkpriority
+}
+
+// res.body
+
+  {
+    {
+  homeworkid: homework.homeworkid,
+  classid: homework.classid,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
+  homeworkpriority: homework.homeworkpriority
+}
+  }
+
+```
+
+##  GET /api/homework/:homework_id
+```
+// req.query
+{
+  homework_id
+}
+
+// res.body
+[
+  {
+    {
+  homeworkid: homework.homeworkid,
+  classid: homework.classid,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
+  homeworkpriority: homework.homeworkpriority
+}
+  }
+]
+```
+
+##  DELETE /api/homework/:homework_id
+```
+// req.query
+{
+  homework_id
+}
+
+// res.body
+[
+  {
+    {
+    row_deleted    
+    }
+  }
+]
+```
+
+##  PATCH /api/homework/:homework_id
+```
+// req.query
+{
+  homework_id
+}
+
+// res.body
+
+  {
+    {
+  homeworkid: homework.homeworkid,
+  classid: homework.classid,
+  homeworkdescription: homework.homeworkdescription,
+  schoolclass: homework.schoolclass,
+  homeworktype: homework.homeworktype,
+  duedate: homework.duedate,
+  duetime: homework.duetime,
+  homeworkpriority: homework.homeworkpriority
+}
+  }
+
+```
+
 # Built with
 
 Node, Express, Mocha, Chai
