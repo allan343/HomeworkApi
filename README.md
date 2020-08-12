@@ -1,8 +1,8 @@
-Name of app: HomeworkApp
+## Name of app: HomeworkApp
 
 Link to app: https://my-homework-app.allanhfcheng.vercel.app
 
-Description of App:
+## Description of App:
 
 This app allows users to add classes and homework.  One class can have one or more homework.  
 A class has the following information:
@@ -30,7 +30,9 @@ This app has three tabs: Home, Calender, Homework
 
 In the home tab, clicking on a class will show all homework this class has.  In the calender tab, clicking on a day in the calender will list all classes on that day.  It will also list homework due on that day.  In the homewwork tab, all homework will either be in the past due column or pending column.
 
-App Screenshots and instructions:
+## App Screenshots and instructions:
+
+## Home Tab
 
 At the homescreen click on "Add Class".
 
@@ -62,6 +64,8 @@ Click on a homework to see homework details.  Both class details and homework de
 ![](imagesForReadMe/HomeworkDetails1.PNG)
 ![](imagesForReadMe/HomeworkDetailsWithDelete.PNG)  
 
+## Calender Tab
+
 Click on the "Calender" tab.
 ![](imagesForReadMe/Calender.PNG)
 
@@ -70,6 +74,8 @@ Select a date in the calender. If a class occurs on this day, it will be listed.
 
 Selecting a day that has homework due will have homework for that day listed.
 ![](imagesForReadMe/HomeworkDue.PNG)
+
+## Homework Tab
 
 Click on "Homework" tab.  All homework is grouped under "Late" and "Pending".
 ![](imagesForReadMe/HomeworkTab.PNG)
