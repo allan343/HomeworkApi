@@ -1,26 +1,284 @@
-# Express Boilerplate!
+Name of app: HomeworkApp
 
-This is a boilerplate project used for starting new projects!
+Link to app: https://my-homework-app.allanhfcheng.vercel.app
 
-## Set up
+Description of App:
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+This app allows users to add classes and homework.  One class can have one or more homework.  
+A class has the following information:
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+classname,
+finish date,
+start date,
+building,
+room,
+teacher,
+starttime,
+endtime,
+days of the week it occurs.
 
-## Scripts
+A homework has the following:
+
+description,
+class it belongs to,
+type,
+due date,
+due time,
+priority
+            
+This app has three tabs: Home, Calender, Homework
+
+In the home tab, clicking on a class will show all homework this class has.  In the calender tab, clicking on a day in the calender will list all classes on that day.  It will also list homework due on that day.  In the homewwork tab, all homework will either be in the past due column or pending column.
+
+App Screenshots and instructions:
+
+At the homescreen click on "Add Class".
+
+![](imagesForReadMe/AddClass.PNG)
+
+Enter class details and click save.  In order to use the calender functionality later, enter days of week (mon tue wed etc. optional).
+![](imagesForReadMe/ClassDetails.PNG)
+
+You now have a new class.
+![](imagesForReadMe/NewClass.PNG)
+
+Now that you have a class you can add homework with "Add Homework".
+![](imagesForReadMe/AddHomework.PNG)
+
+Enter homework details and click save.  The class you created previously will be selectable in a dropdown.
+![](imagesForReadMe/HomeworkDetails.PNG)
+
+You now have a new homework.
+![](imagesForReadMe/NewHomework.PNG)
+
+Using previous steps add a new class.  Then for this class add a new homework.
+![](imagesForReadMe/SecondClass.PNG)
+
+Click on a class to see class details.  When you click on a class, the homework column is filtered for only homework for that class.
+![](imagesForReadMe/HomweorkForClass.PNG)
+
+Click on a homework to see homework details.  Both class details and homework details pages have a edit button allowing you to edit class and homework details respectively.
+
+![](imagesForReadMe/HomeworkDetails1.PNG)
+![](imagesForReadMe/HomeworkDetailsWithDelete.PNG)  
+
+Click on the "Calender" tab.
+![](imagesForReadMe/Calender.PNG)
+
+Select a date in the calender. If a class occurs on this day, it will be listed. You previously entered days of week when creating a class (mon tue wed etc.).  The class will not show up if you select a date before its start date or a date after its end date.
+![](imagesForReadMe/ClassOnDay.PNG)
+
+Selecting a day that has homework due will have homework for that day listed.
+![](imagesForReadMe/HomeworkDue.PNG)
+
+Click on "Homework" tab.  All homework is grouped under "Late" and "Pending".
+![](imagesForReadMe/HomeworkTab.PNG)
+
+## Prerequisites
+
+ShowApp requires Node.js v6.0+ to run.
+
+ShowApp requires Node.js v6.0+ to run. Install the dependencies and devDependencies and start the server.
+
+```npm install ```
+
+## Starting the server
 
 Start the application `npm start`
 
-Start nodemon for the application `npm run dev`
 
-Run the tests `npm test`
+Run the tests `npm t`
 
-## Deploying
+##  Schema
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+schoolClass
+
+```
+schoolClass => ({
+  id: schoolClass.id,
+  classname: schoolClass.classname,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+})
+```
+
+##  API OVERVIEW
+
+##  GET /api/schoolClass/
+```
+// req.query
+{
+  none expected
+}
+
+// res.body
+
+  {
+    {
+  id: schoolClass.id,
+  classname: schoolClass.classname,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+}
+  }
+
+```
+
+##  POST /api/schoolClass/
+```
+// req.query
+ {
+  id: schoolClass.id,
+  classname: schoolClass.classname,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+}
+
+// res.body
+
+  {
+    {
+  id: schoolClass.id,
+  classname: schoolClass.classname,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+}
+  }
+
+```
+
+##  GET /api/schoolClass/:schoolClass_id
+```
+// req.query
+{
+  schoolClass_id
+}
+
+// res.body
+[
+  {
+    {
+  id: schoolClass.id,
+  classname: schoolClass.classname,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+}
+  }
+]
+```
+
+##  DELETE /api/schoolClass/:schoolClass_id
+```
+// req.query
+{
+  schoolClass_id
+}
+
+// res.body
+[
+  {
+    {
+    row_deleted    
+    }
+  }
+]
+```
+
+##  PATCH /api/schoolClass/:schoolClass_id
+```
+// req.query
+{
+  schoolClass_id
+}
+
+// res.body
+
+  {
+    {
+  id: schoolClass.id,
+  classname: schoolClass.classname,
+  finishdate: schoolClass.finishdate,
+  startdate: schoolClass.startdate,
+  building: schoolClass.building,
+  room: schoolClass.room,
+  teacher: schoolClass.teacher,
+  starttime: schoolClass.starttime,
+  endtime: schoolClass.endtime,
+  sun: schoolClass.sun,
+  mon: schoolClass.mon,
+  tue: schoolClass.tue,
+  wed: schoolClass.wed,
+  thurs: schoolClass.thurs,
+  fri: schoolClass.fri,
+  sat: schoolClass.sat
+}
+  }
+
+```
+# Built with
+
+Node, Express, Mocha, Chai
+
+# Authors
+
+Allan Cheng
