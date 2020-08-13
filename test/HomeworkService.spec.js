@@ -59,7 +59,7 @@ describe(`Homework Service object`, function () {
       fri: false,
       sat: false
     },
-  ]
+  ];
 
   let testHomework = [
     {
@@ -82,15 +82,14 @@ describe(`Homework Service object`, function () {
       duetime: "10:00am",
       homeworkpriority: "Medium"
     },
-
-  ]
+  ];
 
   before(() => {
     db = knex({
       client: 'pg',
       connection: process.env.TEST_DATABASE_URL,
     });
-  })
+  });
 
   before(() =>
     db('school_classes').del().then(() => {
@@ -111,15 +110,15 @@ describe(`Homework Service object`, function () {
         .then(() => {
           return db('homework_list')
             .insert(testHomework);
-        })
-    })
+        });
+    });
 
     it(`getAllItems() resolves all items from 'homework' table`, () => {
       return HomeworkService.getAllHomework(db)
         .then(actual => {
           expect(actual).to.eql(testHomework);
-        })
-    })
+        });
+    });
 
     it(`getById() resolves a homework by id from 'homework' table`, () => {
       const idToGet = 2;
@@ -129,8 +128,8 @@ describe(`Homework Service object`, function () {
           expect(actual).to.eql(
             secondItem
           );
-        })
-    })
+        });
+    });
 
     it(`deleteItem() removes an homework by id from 'homework' table`, () => {
       const homeworkId = 1;
@@ -140,8 +139,8 @@ describe(`Homework Service object`, function () {
           // copy the test items array without the removed item
           const expected = testHomework.filter(homework => homework.homeworkid !== homeworkId);
           expect(allItems).to.eql(expected);
-        })
-    })
+        });
+    });
 
     it(`updateItem() updates an homework from the 'homework' table`, () => {
       const idOfItemToUpdate = 1;
@@ -157,22 +156,22 @@ describe(`Homework Service object`, function () {
             ...originalItem,
             ...newItemData,
           });
-        })
-    })
-  })
+        });
+    });
+  });
 
   context(`Given 'homework' has no data`, () => {
     beforeEach(() => {
       return db.into('school_classes')
-        .insert(testItems)
+        .insert(testItems);
     });
 
     it(`getAllItems() resolves an empty array`, () => {
       return HomeworkService.getAllHomework(db)
         .then(actual => {
           expect(actual).to.eql([]);
-        })
-    })
+        });
+    });
 
     it(`insertItem() inserts a homework and resolves the homework with an 'id'`, () => {
       const newItem = {
@@ -191,7 +190,7 @@ describe(`Homework Service object`, function () {
             homeworkid: 1,
             ...newItem
           });
-        })
-    })
-  })
-})
+        });
+    });
+  });
+});

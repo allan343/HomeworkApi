@@ -65,15 +65,15 @@ describe(`School List Service object`, function () {
             client: 'pg',
             connection: process.env.TEST_DATABASE_URL,
         });
-    })
+    });
 
     before(() => {
-        return db('school_classes').del()
+        return db('school_classes').del();
     }
     );
 
     afterEach(() => {
-        return db('school_classes').del()
+        return db('school_classes').del();
     }
     );
 
@@ -84,15 +84,15 @@ describe(`School List Service object`, function () {
             return db
                 .into('school_classes')
                 .insert(testItems);
-        })
+        });
 
         it(`getAllItems() resolves all items from 'school_classes' table`, () => {
 
             return SchoolClassService.getAllSchoolClasses(db)
                 .then(actual => {
                     expect(actual).to.eql(testItems);
-                })
-        })
+                });
+        });
 
         it(`getById() resolves an article by id from 'school_classes' table`, () => {
             const idToGet = 2;
@@ -102,8 +102,8 @@ describe(`School List Service object`, function () {
                     expect(actual).to.eql(
                         secondItem
                     );
-                })
-        })
+                });
+        });
 
         it(`deleteItem() removes a schoolClass ;by id from 'school' table`, () => {
             const classId = 3;
@@ -114,8 +114,8 @@ describe(`School List Service object`, function () {
                     const expected = testItems
                         .filter(schoolClass => schoolClass.id !== classId);
                     expect(allItems).to.eql(expected);
-                })
-        })
+                });
+        });
 
         it(`updateItem() updates an show from the 'show' table`, () => {
             const idOfItemToUpdate = 2;
@@ -131,17 +131,17 @@ describe(`School List Service object`, function () {
                         ...originalItem,
                         ...newItemData,
                     });
-                })
-        })
-    })
+                });
+        });
+    });
 
     context(`Given 'schoolclasss' has no data`, () => {
         it(`getAllItems() resolves an empty array`, () => {
             return SchoolClassService.getAllSchoolClasses(db)
                 .then(actual => {
                     expect(actual).to.eql([]);
-                })
-        })
+                });
+        });
 
         it(`insertItem() inserts an schoolclass and resolves the SchoolClass with an 'id'`, () => {
             const newItem = {
@@ -168,9 +168,9 @@ describe(`School List Service object`, function () {
                         id: 3,
                         ...newItem
                     });
-                })
-        })
-    })
+                });
+        });
+    });
 
 
 })

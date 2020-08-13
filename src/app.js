@@ -1,20 +1,20 @@
-require('dotenv').config()
-const express = require('express')
-const morgan = require('morgan')
-const helmet = require('helmet')
-const cors = require('cors')
-const { NODE_ENV } = require('./config')
-const SchoolClassRoute = require('./schoolClass/SchoolClassRouter')
-const HomeworkRoute = require('./homework/HomeworkRouter')
+require('dotenv').config();
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const { NODE_ENV } = require('./config');
+const SchoolClassRoute = require('./schoolClass/SchoolClassRouter');
+const HomeworkRoute = require('./homework/HomeworkRouter');
 
-const app = express()
+const app = express();
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-app.use(morgan(morganOption))
-app.use(helmet())
+app.use(morgan(morganOption));
+app.use(helmet());
 const { CLIENT_ORIGIN } = require('./config');
 
 app.use(
@@ -23,11 +23,11 @@ app.use(
   })
 );
 
-app.use(cors())
-app.use('/schoolClass', SchoolClassRoute)
-app.use('/homework', HomeworkRoute)
+app.use(cors());
+app.use('/schoolClass', SchoolClassRoute);
+app.use('/homework', HomeworkRoute);
 app.get('/', (req, res) => {
-  res.send('Hello, world!')
+  res.send('Hello, world!');
 })
 
 app.use(function errorHandler(error, req, res, next) {
@@ -37,7 +37,7 @@ app.use(function errorHandler(error, req, res, next) {
   } else {
     response = { message: error.message, error }
   }
-  res.status(500).json(response)
+  res.status(500).json(response);
 })
 
 module.exports = app
