@@ -21,7 +21,7 @@ HomeworkRouter
     const knexInstance = req.app.get('db');
     HomeworkService.getAllHomework(knexInstance)
       .then(homeworkList => {
-        res.json(homeworkList.map(serializeHomework))
+        res.json(homeworkList.map(serializeHomework));
       })
       .catch(next);
   })

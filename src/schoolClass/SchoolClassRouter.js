@@ -1,8 +1,7 @@
-const express = require('express')
-const SchoolClassService = require('./SchoolClassService')
-
-const SchoolClassRouter = express.Router()
-const jsonParser = express.json()
+const express = require('express');
+const SchoolClassService = require('./SchoolClassService');
+const SchoolClassRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeSchoolClass = schoolClass => ({
   id: schoolClass.id,
@@ -21,19 +20,19 @@ const serializeSchoolClass = schoolClass => ({
   thurs: schoolClass.thurs,
   fri: schoolClass.fri,
   sat: schoolClass.sat
-  
 });
+
 // endpoints for schoolClass object
 
 SchoolClassRouter
   .route('/')
   .get((req, res, next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.get('db');
     SchoolClassService.getAllSchoolClasses(knexInstance)
       .then(schoolClasses => {
         res.json(schoolClasses.map(serializeSchoolClass))
       })
-      .catch(next)
+      .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
@@ -45,9 +44,9 @@ SchoolClassRouter
         res
           .status(201)
           .location(req.originalUrl + `/${newShoolClass.id}`)
-          .json(serializeSchoolClass(newShoolClass))
+          .json(serializeSchoolClass(newShoolClass));
       })
-      .catch(next)
+      .catch(next);
   })
 
 SchoolClassRouter
@@ -61,15 +60,15 @@ SchoolClassRouter
         if (!schoolClass) {
           return res.status(404).json({
             error: { message: `School class doesn't exist` }
-          })
+          });
         }
-        res.schoolClass = schoolClass
-        next()
+        res.schoolClass = schoolClass;
+        next();
       })
-      .catch(next)
+      .catch(next);
   })
   .get((req, res, next) => {
-    res.json(serializeSchoolClass(res.schoolClass))
+    res.json(serializeSchoolClass(res.schoolClass));
   })
   .delete((req, res, next) => {
     SchoolClassService.deleteSchoolClass(
@@ -79,9 +78,9 @@ SchoolClassRouter
     .then(newShoolClass => {
       res
         .status(201)
-        .send(serializeSchoolClass(newShoolClass))
+        .send(serializeSchoolClass(newShoolClass));
     })
-      .catch(next)
+      .catch(next);
   })
 
   .patch(jsonParser, (req, res, next) => {
