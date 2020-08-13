@@ -1,6 +1,6 @@
 const HomeworkService = {
   getAllHomework(knex) {
-    return knex.select('*').from('homework_list')
+    return knex.select('*').from('homework_list');
   },
   insertHomework(knex, newHomework) {
     return knex
@@ -8,21 +8,21 @@ const HomeworkService = {
       .into('homework_list')
       .returning('*')
       .then(rows => {
-        return rows[0]
+        return rows[0];
       })
   },
   getById(knex, homeworkid) {
-    return knex.from('homework_list').select('*').where('homeworkid', homeworkid).first()
+    return knex.from('homework_list').select('*').where('homeworkid', homeworkid).first();
   },
   deleteHomework(knex, homeworkid) {
     return knex('homework_list')
       .where({ homeworkid })
-      .delete()
+      .delete();
   },
   updateHomework(knex, homeworkid, newHomework) {
     return knex('homework_list')
       .where({ homeworkid })
-      .update(newHomework)
+      .update(newHomework);
   },
 }
 

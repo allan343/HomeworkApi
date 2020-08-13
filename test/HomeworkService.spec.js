@@ -59,7 +59,6 @@ describe(`Homework Service object`, function () {
       fri: false,
       sat: false
     },
-
   ]
 
   let testHomework = [
@@ -107,7 +106,6 @@ describe(`Homework Service object`, function () {
 
   context(`Given 'homework' has data`, () => {
     beforeEach(() => {
-      console.log("test");
       return db('school_classes')
         .insert(testItems)
         .then(() => {
@@ -119,7 +117,6 @@ describe(`Homework Service object`, function () {
     it(`getAllItems() resolves all items from 'homework' table`, () => {
       return HomeworkService.getAllHomework(db)
         .then(actual => {
-          console.log(actual);
           expect(actual).to.eql(testHomework);
         })
     })

@@ -23,6 +23,7 @@ const serializeSchoolClass = schoolClass => ({
   sat: schoolClass.sat
   
 });
+// endpoints for schoolClass object
 
 SchoolClassRouter
   .route('/')
@@ -36,7 +37,6 @@ SchoolClassRouter
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
-
     SchoolClassService.insertSchoolClass(
       req.app.get('db'),
       newSchoolClass
@@ -77,7 +77,6 @@ SchoolClassRouter
       req.params.schoolClass_id
     )
     .then(newShoolClass => {
-      console.log(newShoolClass)
       res
         .status(201)
         .send(serializeSchoolClass(newShoolClass))
@@ -88,8 +87,6 @@ SchoolClassRouter
   .patch(jsonParser, (req, res, next) => {
     const schoolClassToUpdate = req.body;
     schoolClassToUpdate.id = req.params.schoolClass_id;
-    console.log(schoolClassToUpdate);
-
     SchoolClassService.updateSchoolClass(
       req.app.get('db'),
       req.params.schoolClass_id,
