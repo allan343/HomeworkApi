@@ -16,12 +16,12 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption));
 app.use(helmet());
 const { CLIENT_ORIGIN } = require('./config');
-
+/*
 app.use(
   cors({
     origin: CLIENT_ORIGIN
   })
-);
+);*/
 
 app.use('/schoolClass', SchoolClassRoute);
 app.use('/homework', HomeworkRoute);
