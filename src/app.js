@@ -23,7 +23,6 @@ app.use(
   })
 );
 
-app.use(cors());
 app.use('/schoolClass', SchoolClassRoute);
 app.use('/homework', HomeworkRoute);
 app.get('/', (req, res) => {
