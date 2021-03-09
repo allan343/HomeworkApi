@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const cors = require('cors');
+//const cors = require('cors');
 const { NODE_ENV } = require('./config');
 const SchoolClassRoute = require('./schoolClass/SchoolClassRouter');
 const HomeworkRoute = require('./homework/HomeworkRouter');
