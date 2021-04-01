@@ -23,7 +23,11 @@ HomeworkRouter
       .then(homeworkList => {
         res.json(homeworkList.map(serializeHomework));
       })
-      .catch(next);
+      .catch((err)=>{
+
+        console.log(err);
+        next();
+      });
   })
   .post(jsonParser, (req, res, next) => {
     const newHomework = req.body;
