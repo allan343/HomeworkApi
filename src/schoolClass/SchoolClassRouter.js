@@ -32,7 +32,11 @@ SchoolClassRouter
       .then(schoolClasses => {
         res.json(schoolClasses.map(serializeSchoolClass))
       })
-      .catch(next);
+      .catch((err)=>{
+
+        console.log(err);
+        next();
+      });
   })
   .post(jsonParser, (req, res, next) => {
     const newSchoolClass = req.body;
