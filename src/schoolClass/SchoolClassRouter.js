@@ -36,6 +36,7 @@ SchoolClassRouter
 
         console.log(err);
         next();
+        
       });
   })
   .post(jsonParser, (req, res, next) => {
